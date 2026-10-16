@@ -1,4 +1,5 @@
 public class Mago extends Personagem {
+    public static Object nome;
     private String tipoMagia;
 
     public Mago(String nome, int nivel, int vida, String tipoMagia) {

@@ -54,4 +54,9 @@ public class Personagem {
         System.out.println("Nome: " + nome + " | Nível: " + nivel + " | Vida: " + vida
                 + " | Situação: " + (estaVivo() ? "Vivo" : "Derrotado"));
     }
+
+
+
+
+
 }

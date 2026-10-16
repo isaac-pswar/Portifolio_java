@@ -11,27 +11,31 @@ public class Main {
 
         while (rodando) {
             System.out.println("\n===== SISTEMA DE PERSONAGENS RPG =====");
-            System.out.println("1 - Cadastrar personagem");
-            System.out.println("2 - Cadastrar guerreiro");
-            System.out.println("3 - Cadastrar mago");
-            System.out.println("4 - Consultar personagens");
-            System.out.println("5 - Realizar ataque");
-            System.out.println("6 - Causar dano manual a um personagem");
-            System.out.println("7 - Batalha interativa (você escolhe as ações)");
-            System.out.println("8 - Batalha automática");
-            System.out.println("0 - Sair");
+            
+            System.out.println("1 - Cadastrar guerreiro");
+            System.out.println("2 - Cadastrar mago");
+            System.out.println("3 - Consultar personagens");
+            System.out.println("4 - Realizar ataque");
+            System.out.println("5 - Causar dano manual a um personagem");
+            System.out.println("6 - Batalha interativa (você escolhe as ações)");
+            System.out.println("7 - Batalha automática");
+            System.out.println("8 - Cadastrar Rogue");
+            System.out.println("9 - Sair");
+            System.out.println("10 - Deletar Personagem");
             System.out.print("Escolha: ");
 
             switch (sc.nextLine().trim()) {
-                case "1": cadastrarPersonagem(sc); break;
-                case "2": cadastrarGuerreiro(sc); break;
-                case "3": cadastrarMago(sc); break;
-                case "4": consultar(); break;
-                case "5": atacar(sc); break;
-                case "6": causarDano(sc); break;
-                case "7": batalha(sc, true); break;
-                case "8": batalha(sc, false); break;
-                case "0": rodando = false; break;
+                
+                case "1": cadastrarGuerreiro(sc); break;
+                case "2": cadastrarMago(sc); break;
+                case "3": consultar(); break;
+                case "4": atacar(sc); break;
+                case "5": causarDano(sc); break;
+                case "6": batalha(sc, true); break;
+                case "7": batalha(sc, false); break;
+                case "8": cadastrarRogue(sc); break;
+                case "9": rodando = false; break;
+                case "10": DeletarPersonagem( sc); break;
                 default: System.out.println("Opção inválida.");
             }
         }
@@ -39,17 +43,7 @@ public class Main {
     }
 
     // ---------- Cadastros ----------
-    private static void cadastrarPersonagem(Scanner sc) {
-        try {
-            String nome = lerTexto(sc, "Nome: ");
-            int nivel = lerInt(sc, "Nível: ");
-            int vida = lerInt(sc, "Vida: ");
-            personagens.add(new Personagem(nome, nivel, vida));
-            System.out.println("Personagem cadastrado!");
-        } catch (IllegalArgumentException e) {
-            System.out.println("Erro: " + e.getMessage());
-        }
-    }
+    
 
     private static void cadastrarGuerreiro(Scanner sc) {
         try {
@@ -76,6 +70,34 @@ public class Main {
             System.out.println("Erro: " + e.getMessage());
         }
     }
+
+private static void cadastrarRogue(Scanner sc) {
+        try {
+            String nome = lerTexto(sc, "Nome: ");
+            int nivel = lerInt(sc, "Nível: ");
+            int vida = lerInt(sc, "Vida: ");
+            String Gadget = lerTexto(sc, "Tipo de Ferramenta: ");
+            personagens.add(new Rogue(nome, nivel, vida, Gadget));
+            System.out.println("Rogue cadastrado!");
+        } catch (IllegalArgumentException e) {
+            System.out.println("Erro: " + e.getMessage());
+        }
+    }
+
+
+    private static void DeletarPersonagem(Scanner sc){
+    Personagem vascado = escolher(sc, "Quem será vascado?");
+    if (vascado == null) {
+        System.out.println("Escolha inválida");
+        return; 
+    }
+    
+    personagens.remove(vascado);
+    System.out.println("Personagem " + vascado.getNome() + " foi vascado com sucesso!");
+    //deleta os personagens do arraylist usando o método escolher definido anteriormente.
+}
+
+
 
     // ---------- Ações ----------
     private static void consultar() {
